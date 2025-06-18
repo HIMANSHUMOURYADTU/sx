@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoViz Pro - Vanilla JS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.plot.ly/plotly-2.29.1.min.js" charset="utf-8"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>AutoViz Pro</h1>
+            <button id="reset-button" class="text-button hidden">Upload New File</button>
+        </header>
+
+        <!-- UPLOAD VIEW -->
+        <section id="upload-section">
+            <form id="upload-form">
+                <label id="file-drop-zone" for="file-input">
+                    <div id="file-drop-zone-content">
+                        <i data-lucide="upload-cloud"></i>
+                        <p>Drag & drop a CSV file here, or click to select</p>
+                    </div>
+                    <div id="file-name-display" class="hidden"></div>
+                </label>
+                <input type="file" id="file-input" accept=".csv" hidden>
+
+                <div class="form-group">
+                    <label for="date-format-input">Date Format (Optional)</label>
+                    <input type="text" id="date-format-input" placeholder="e.g., %Y-%m-%d %H:%M:%S">
+                    <p class="form-hint">Provide a format if dates aren't auto-detected. <a href="https://strftime.org/" target="_blank">Format codes</a>.</p>
+                </div>
+
+                <button type="submit" id="upload-button">
+                    <span class="button-text">Analyze & Visualize</span>
+                    <span class="spinner hidden"></span>
+                </button>
+            </form>
+        </section>
+
+        <!-- DASHBOARD VIEW -->
+        <section id="dashboard-section" class="hidden">
+            <div class="dashboard-grid">
+                <!-- Left Panel: Column Analysis -->
+                <div id="column-analysis-container" class="card">
+                    <div class="card-header">
+                        <h2>Data Overview</h2>
+                        <p id="file-name-header"></p>
+                    </div>
+                    <div class="card-content" id="column-list">
+                        <!-- Column items will be injected here -->
+                    </div>
+                </div>
+
+                <!-- Center Panel: Chart Display -->
+                <div id="chart-display-container" class="card">
+                    <div class="card-content" id="chart-content">
+                        <div id="chart-placeholder">
+                             <i data-lucide="bar-chart-2"></i>
+                             <h3>Your Chart Awaits</h3>
+                             <p>Select a suggestion to generate a visualization.</p>
+                        </div>
+                        <div id="chart-loader" class="hidden">
+                            <div class="spinner large"></div>
+                        </div>
+                        <div id="chart-display"></div>
+                    </div>
+                </div>
+
+                <!-- Right Panel: Suggestions -->
+                <div id="suggestions-container" class="card">
+                    <div class="card-header">
+                        <h2>Chart Suggestions</h2>
+                    </div>
+                    <div class="card-content scrollable" id="suggestions-list">
+                        <!-- Suggestion items will be injected here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="hidden"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
